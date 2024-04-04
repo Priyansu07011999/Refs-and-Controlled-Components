@@ -22,11 +22,34 @@ function AddUser(props) {
     const enteredCollegeName = collegeInputRef.current.value;
 
     if(enteredName.trim().length === 0 || enteredAge.trim().length === 0 || enteredCollegeName.length === 0 ){
+      if(enteredName.trim().length === 0 && enteredAge.trim().length !== 0 && enteredCollegeName.length !== 0){
         setError({
-            title: 'Invalid input',
-            message: 'Please enter a valid name and age and college name (non-empty values).',
-          });
+          title: 'Invalid input',
+          message: 'Please enter a valid name (non-empty values).',
+        });
         return;
+      }
+      else if(enteredName.trim().length !== 0 && enteredAge.trim().length === 0 && enteredCollegeName.length !== 0){
+        setError({
+          title: 'Invalid input',
+          message: 'Please enter a valid Age (non-empty values).',
+        });
+        return;
+      }
+      else if(enteredName.trim().length !== 0 && enteredAge.trim().length !== 0 && enteredCollegeName.length === 0){
+        setError({
+          title: 'Invalid input',
+          message: 'Your college Name can not be empty. (non-empty values).',
+        });
+        return;
+      }
+      else{
+        setError({
+          title: 'Invalid input',
+          message: 'Please enter all valid values(Your Name, Your Age and your College Name)',
+        });
+        return;
+      }
     }
     if (+enteredAge < 1){
         setError({
